@@ -30,14 +30,4 @@ public class AppRestController {
             throw new NoSuchEmployeeException("No user with id = " + id);
         return employee;
     }
-
-    @ExceptionHandler
-    public ResponseEntity<EmployeeExceptionInfo> noSuchEmpExceptionHandler(NoSuchEmployeeException exception) {
-        return new ResponseEntity<>(new EmployeeExceptionInfo(exception.getMessage()), HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<EmployeeExceptionInfo> noSuchEmpExceptionHandler(Exception exception) {
-        return new ResponseEntity<>(new EmployeeExceptionInfo(exception.getMessage()), HttpStatus.BAD_REQUEST);
-    }
 }
