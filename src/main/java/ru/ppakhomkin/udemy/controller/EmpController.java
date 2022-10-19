@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.ppakhomkin.udemy.entity.Employee;
+import ru.ppakhomkin.udemy.entity.db.Employee;
 import ru.ppakhomkin.udemy.service.EmployeeService;
 
 @Controller

@@ -1,11 +1,12 @@
 package ru.ppakhomkin.udemy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ru.ppakhomkin.udemy.entity.Employee;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.ppakhomkin.udemy.entity.db.Employee;
+import ru.ppakhomkin.udemy.entity.message.EmployeeExceptionInfo;
+import ru.ppakhomkin.udemy.exceptions.NoSuchEmployeeException;
 import ru.ppakhomkin.udemy.service.EmployeeService;
 
 import java.util.List;
@@ -24,6 +25,19 @@ public class AppRestController {
 
     @GetMapping("/employees/{id}")
     public Employee getEmpById(@PathVariable int id) {
-        return employeeService.getById(id);
+        Employee employee = employeeService.getById(id);
+        if (employee == null)
+            throw new NoSuchEmployeeException("No user with id = " + id);
+        return employee;
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<EmployeeExceptionInfo> noSuchEmpExceptionHandler(NoSuchEmployeeException exception) {
+        return new ResponseEntity<>(new EmployeeExceptionInfo(exception.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<EmployeeExceptionInfo> noSuchEmpExceptionHandler(Exception exception) {
+        return new ResponseEntity<>(new EmployeeExceptionInfo(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

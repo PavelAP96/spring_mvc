@@ -1,4 +1,4 @@
-package ru.ppakhomkin.udemy.entity;
+package ru.ppakhomkin.udemy.entity.db;
 
 
 import ru.ppakhomkin.udemy.validation.Email;

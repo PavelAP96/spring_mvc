@@ -6,7 +6,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.ppakhomkin.udemy.dao.EmployeeDao;
-import ru.ppakhomkin.udemy.entity.Employee;
+import ru.ppakhomkin.udemy.entity.db.Employee;
 
 import java.util.List;
 
