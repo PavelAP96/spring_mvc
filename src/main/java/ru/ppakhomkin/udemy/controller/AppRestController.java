@@ -30,4 +30,24 @@ public class AppRestController {
             throw new NoSuchEmployeeException("No user with id = " + id);
         return employee;
     }
+
+    @PostMapping("/employees")
+    public Employee saveEmp(@RequestBody Employee employee) {
+        employeeService.save(employee);
+        return employee;
+    }
+
+    @PutMapping("/employees")
+    public Employee updateEmp(@RequestBody Employee employee) {
+        employeeService.save(employee);
+        return employee;
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public ResponseEntity<EmployeeExceptionInfo> deleteEmp(@PathVariable int id) {
+        if (employeeService.getById(id) == null)
+            throw new NoSuchEmployeeException("No user with id = " + id + " to delete him");
+        employeeService.delete(id);
+        return new ResponseEntity<>(new EmployeeExceptionInfo("Employee with id = " + id + "deleted"), HttpStatus.OK);
+    }
 }
