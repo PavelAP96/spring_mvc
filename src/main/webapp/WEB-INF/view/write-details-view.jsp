@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,11 +24,13 @@
     <form:errors path="salary"/>
     <br>
     <br>
+    <security:authorize access="hasRole('HR')">
     Department: <form:select path="department">
 <%--    <form:option value="Information Technologies" label="IT"/>--%>
 <%--    <form:option value="HR" label="HR"/>--%>
     <form:options items="${employee.departments}"/>
     </form:select>
+    </security:authorize>
     <br>
     <br>
     Car: <form:radiobuttons path="carBrand" items="${employee.carBrands}"/>
